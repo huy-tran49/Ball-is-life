@@ -1,0 +1,21 @@
+body{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(29, 21, 41);
+    background-image: url('cBcdWW4.png');
+    background-size: contain;
+    margin: auto 0;
+}
+
+div#game-container {
+    display: flex;
+    justify-content: center;
+}
+
+canvas {
+    border: 1px solid black;
+    display: flex;
+    height: 600px;
+    width: 800px;
+    background-color: grey;
+}
