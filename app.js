@@ -6,51 +6,65 @@ const random = Math.floor(Math.random() * textArray.length)
 const randomText = textArray[random]
 
 const basketballImage = new Image(100, 100)
-basketballImage.src = 'basketball.png'
+basketballImage.src = 'ball.png'
 
+let T = 0
+let X0 = 0
+let Y0 = canvas.height - 20
+let X = X0
+let Y = Y0
+let speed = .42
+let angle = 45
+let g = .0005
+let oldTimeStamp = 0
+let secondPassed = 0
+let animationSpeed = 1200
+let timeStamp = 100
 
 const Basketball = {
-    x: 50,
-    y: 100,
-    rad: 10,
-    color: 'orange',
+    x: 0,
+    y: 0,
+    sw: 100,
+    sh: 100,
+    dx: X,
+    dy: Y,
+    frame: 0,
+    
     render(){
-        ctx.drawImage(basketballImage, 0, 0, 500, 500, 0, 0, 200, 200)
+        //ctx.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh)
+        ctx.drawImage(basketballImage, this.frame * this.sw, 0, this.sw, this.sh, this.dx, this.dy, 40, 40)
     }
 }
 
 const animation = () => {
-    ctx.clearRect(Basketball.x - 50, Basketball.y - 100, canvas.width, canvas.height)
+    ctx.clearRect(Basketball.x, Basketball.y, canvas.width, canvas.height)
     Basketball.render()
-    if(Basketball.x < canvas.width) {
-        Basketball.x += 2
-        //console.log(Basketball.x)
+    if(Basketball.frame < 11) {
+        Basketball.frame++
+    } else {
+        Basketball.frame = 0
     }
-    if(Basketball.y > 50) {
-        Basketball.y += -1
-        console.log(Basketball.y)
-    }
+    secondPassed = (timeStamp - oldTimeStamp)/1000
+    oldTimeStamp = timeStamp
+    update()
 }
 
-// const basketballImage = new Image()
-// basketballImage.src = 'ballketball.png'
-// ctx.drawImage(basketballImage, 0, 0, 500, 500, 0, 0, 200, 200)
 
-const gameInterval = setInterval(animation, 20)
+const update = ()=> {
+    timeStamp+= 10
+    console.log(timeStamp)
+    T += animationSpeed * secondPassed
+    Basketball.dx = speed * Math.cos(-angle * Math.PI/180) * T + X0
+    Basketball.dy = 0.5 * g * T * T + speed * Math.sin(-angle * Math.PI/180) * T + Y0
+    console.log(Basketball.dx)
+    console.log(Basketball.dy)
+}
+
+
+
+const gameInterval = setInterval(animation, 30)
 
 document.addEventListener('DOMContentLoaded',()=>{
     gameInterval
 })
 
-// const Basketball = {
-//     x: 50,
-//     y: 100,
-//     rad: 10,
-//     color: 'orange',
-//     render() {
-//         ctx.beginPath()
-//         ctx.fillStyle = this.color
-//         ctx.arc(this.x, this.y, this.rad, 0, Math.PI * 2)
-//         ctx.fill()
-//     }
-// }
