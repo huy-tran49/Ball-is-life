@@ -5,17 +5,17 @@ const textArray = ['a','s','f','e','g','y','j','y','m','o','p']
 const random = Math.floor(Math.random() * textArray.length)
 const randomText = textArray[random]
 
+const basketballImage = new Image(100, 100)
+basketballImage.src = 'basketball.png'
+
 
 const Basketball = {
     x: 50,
     y: 100,
     rad: 10,
     color: 'orange',
-    render() {
-        ctx.beginPath()
-        ctx.fillStyle = this.color
-        ctx.arc(this.x, this.y, this.rad, 0, Math.PI * 2)
-        ctx.fill()
+    render(){
+        ctx.drawImage(basketballImage, 0, 0, 500, 500, 0, 0, 200, 200)
     }
 }
 
@@ -32,11 +32,25 @@ const animation = () => {
     }
 }
 
-// ctx.font = '20px serif'
-// const text = ctx.fillText(`${randomText}`, 20, 20)
+// const basketballImage = new Image()
+// basketballImage.src = 'ballketball.png'
+// ctx.drawImage(basketballImage, 0, 0, 500, 500, 0, 0, 200, 200)
 
 const gameInterval = setInterval(animation, 20)
 
 document.addEventListener('DOMContentLoaded',()=>{
     gameInterval
 })
+
+// const Basketball = {
+//     x: 50,
+//     y: 100,
+//     rad: 10,
+//     color: 'orange',
+//     render() {
+//         ctx.beginPath()
+//         ctx.fillStyle = this.color
+//         ctx.arc(this.x, this.y, this.rad, 0, Math.PI * 2)
+//         ctx.fill()
+//     }
+// }
