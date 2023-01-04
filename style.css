@@ -1,21 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Quicksand&display=swap');
+
 body{
     display: flex;
     justify-content: center;
     background-color: rgb(29, 21, 41);
-    background-image: url('cBcdWW4.png');
     background-size: contain;
     margin: auto 0;
+}
+
+h1 {
+    font-family: 'Quicksand', sans-serif;
+    color: white;
+    font-size: 50px;
+}
+
+h2#prompt {
+    font-family: 'Gaegu', cursive;
+    color: white;
+    z-index: 5;
+    font-size: 50px;
 }
 
 div#game-container {
     display: flex;
     justify-content: center;
+    margin-top: 100px;
 }
 
-canvas {
+div#game-word {
+    display: flex;
+    justify-content: center;
+    
+}
+
+div#game-basketball {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+}
+
+canvas#basketball {
     border: 1px solid black;
     display: flex;
     height: 600px;
     width: 1000px;
-    background-color: grey;
+    background-color: rgb(102, 169, 233);
+    position: absolute;
+    z-index: 1;
+}
+
+canvas#typing {
+    border: 1px solid black;
+    display: flex;
+    height: 600px;
+    width: 1000px;
+    background-color: rgb(78, 67, 49);
+    position: absolute;
+    z-index: 2;
+}
+
+#input-field{
+    z-index: 4;
+    display: flex;
+    align-items: flex-end;
+}
+
+input{
+    font-family: 'Gaegu', cursive;
+    background-color: black;
+    color: white;
+    border: none;
+    font-size: 30px;
 }

@@ -1,20 +1,44 @@
-const canvas = document.getElementById('canvas')
+const canvas = document.getElementById('basketball')
 const ctx = canvas.getContext('2d')
 
-const textArray = ['a','s','f','e','g','y','j','y','m','o','p']
+const textArray = ['bat','cat','dog','air','pink','tear','sock','chip','quit','ball','puck']
 const random = Math.floor(Math.random() * textArray.length)
 const randomText = textArray[random]
 
+const displayWord = document.getElementById('prompt')
+displayWord.innerHTML = randomText
+
+let value = ''
+const getValue = () => {
+    value = document.getElementById('input-text').value
+    //console.log(value)
+}
+
+const compareText = () => {
+    if(value === randomText){
+        console.log('correct')
+    } else {
+        console.log('wrong')
+    }
+}
+
+document.addEventListener('submit',()=>{
+    getValue()
+    compareText()
+})
+
+// Basketball
 const basketballImage = new Image(100, 100)
 basketballImage.src = 'ball.png'
 
 let T = 0
 let X0 = 0
-let Y0 = canvas.height - 20
+let Y0 = canvas.height 
 let X = X0
-let Y = Y0
-let speed = .42
-let angle = 45
+let Y = Y0 + 40
+//set speed to .43 for make basket
+let speed = .43
+let angle = 50
 let g = .0005
 let oldTimeStamp = 0
 let secondPassed = 0
@@ -37,8 +61,10 @@ const Basketball = {
 }
 
 const animation = () => {
+    //clear previous frame
     ctx.clearRect(Basketball.x, Basketball.y, canvas.width, canvas.height)
     Basketball.render()
+    //looping through each frame
     if(Basketball.frame < 11) {
         Basketball.frame++
     } else {
@@ -46,21 +72,16 @@ const animation = () => {
     }
     secondPassed = (timeStamp - oldTimeStamp)/1000
     oldTimeStamp = timeStamp
-    update()
+    //change the speed variable on either miss or make
+    trajectory(speed)
 }
 
-
-const update = ()=> {
+const trajectory = (speed) => {
     timeStamp+= 10
-    console.log(timeStamp)
     T += animationSpeed * secondPassed
     Basketball.dx = speed * Math.cos(-angle * Math.PI/180) * T + X0
     Basketball.dy = 0.5 * g * T * T + speed * Math.sin(-angle * Math.PI/180) * T + Y0
-    console.log(Basketball.dx)
-    console.log(Basketball.dy)
 }
-
-
 
 const gameInterval = setInterval(animation, 30)
 
