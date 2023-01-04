@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Graduate&family=Quicksand&display=swap');
 
 body{
     display: flex;
@@ -9,7 +9,7 @@ body{
 }
 
 h1 {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Graduate', cursive;
     color: white;
     font-size: 50px;
 }
@@ -30,7 +30,7 @@ div#game-container {
 div#game-word {
     display: flex;
     justify-content: center;
-    
+    position: absolute;
 }
 
 div#game-basketball {

@@ -1,5 +1,9 @@
-const canvas = document.getElementById('basketball')
-const ctx = canvas.getContext('2d')
+const canvasBasketball = document.getElementById('basketball')
+const ctx = canvasBasketball.getContext('2d')
+
+const canvasTyping = document.getElementById('typing')
+
+const inputField = document.getElementById('input-field')
 
 const textArray = ['bat','cat','dog','air','pink','tear','sock','chip','quit','ball','puck']
 const random = Math.floor(Math.random() * textArray.length)
@@ -14,26 +18,26 @@ const getValue = () => {
     //console.log(value)
 }
 
-const compareText = () => {
+const compareValue = () => {
     if(value === randomText){
-        console.log('correct')
+        canvasBasketball.style.zIndex = '10'
     } else {
-        console.log('wrong')
+        inputField.reset()
     }
 }
 
 document.addEventListener('submit',()=>{
     getValue()
-    compareText()
+    compareValue()
 })
 
-// Basketball
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$ BASKETBALL $$$$$$$$$$$$$$$$$$$$$$$$$$$$
 const basketballImage = new Image(100, 100)
 basketballImage.src = 'ball.png'
 
 let T = 0
 let X0 = 0
-let Y0 = canvas.height 
+let Y0 = canvasBasketball.height 
 let X = X0
 let Y = Y0 + 40
 //set speed to .43 for make basket
@@ -62,8 +66,8 @@ const Basketball = {
 
 const animation = () => {
     //clear previous frame
-    ctx.clearRect(Basketball.x, Basketball.y, canvas.width, canvas.height)
-    Basketball.render()
+    ctx.clearRect(Basketball.x, Basketball.y, canvasBasketball.width, canvasBasketball.height)
+    //Basketball.render()
     //looping through each frame
     if(Basketball.frame < 11) {
         Basketball.frame++
@@ -83,9 +87,17 @@ const trajectory = (speed) => {
     Basketball.dy = 0.5 * g * T * T + speed * Math.sin(-angle * Math.PI/180) * T + Y0
 }
 
+const renderBall = document.addEventListener('keyup', (event)=>{
+    if (event.key === ' ') {
+        Basketball.render(event.key)
+    }
+    console.log(event.key)
+})
+
 const gameInterval = setInterval(animation, 30)
 
-document.addEventListener('DOMContentLoaded',()=>{
+document.addEventListener('DOMcontentloaded',()=>{
     gameInterval
+    renderBall
 })
 
