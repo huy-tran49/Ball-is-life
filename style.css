@@ -16,7 +16,7 @@ h1 {
 
 h2#prompt {
     font-family: 'Gaegu', cursive;
-    color: white;
+    color:  rgb(29, 21, 41);
     z-index: 5;
     font-size: 50px;
 }
@@ -44,7 +44,8 @@ canvas#basketball {
     display: flex;
     height: 600px;
     width: 1000px;
-    background-color: rgb(102, 169, 233);
+    background-image: url(clouds.png);
+    /*background-color: rgb(102, 169, 233);*/
     position: absolute;
     z-index: 1;
 }
