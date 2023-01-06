@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Graduate&family=Quicksand&display=swap');
 
-body{
+body {
     display: flex;
     justify-content: center;
     background-color: rgb(29, 21, 41);
@@ -17,8 +17,18 @@ h1 {
 h2#prompt {
     font-family: 'Gaegu', cursive;
     color:  rgb(29, 21, 41);
-    z-index: 5;
+    /* z-index: 3; */
     font-size: 50px;
+    display: flex;
+    align-items: flex-start;
+}
+
+h2#score {
+    font-family: 'Gaegu', cursive;
+    color:  rgb(29, 21, 41);
+    font-size: 50px;
+    display: flex;
+    align-items: flex-start;
 }
 
 div#game-container {
@@ -29,14 +39,18 @@ div#game-container {
 
 div#game-word {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    height: 600px;
+    width: 1000px;
     position: absolute;
+    z-index: 2;
 }
 
 div#game-basketball {
     display: flex;
     justify-content: center;
     position: absolute;
+    z-index: 1;
 }
 
 canvas#basketball {
@@ -47,29 +61,48 @@ canvas#basketball {
     background-image: url(clouds.png);
     /*background-color: rgb(102, 169, 233);*/
     position: absolute;
-    z-index: 1;
 }
 
-canvas#typing {
+div#start-menu {
     border: 1px solid black;
-    display: none;
+    display: flex;
     height: 600px;
     width: 1000px;
     background-color: rgb(78, 67, 49);
     position: absolute;
-    z-index: 2;
-}
-
-#input-field{
     z-index: 4;
-    display: flex;
-    align-items: flex-end;
 }
 
-input{
+#input-field {
+    /* z-index: 3; */
+    display: flex;
+    align-items: center;
+}
+
+input {
     font-family: 'Gaegu', cursive;
     background-color: black;
     color: white;
     border: none;
     font-size: 30px;
+}
+
+button {
+    display: block;
+    height: 50px;
+    width: 300px;
+    margin: auto 0;
+    align-items: center;
+}
+
+div#instruction {
+    display: none;
+    height: 600px;
+    width: 1000px;
+    background-color: white;
+    position: absolute;
+}
+
+div#text-container {
+    display: block;
 }

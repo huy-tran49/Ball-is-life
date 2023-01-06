@@ -1,45 +1,59 @@
 const canvasBasketball = document.getElementById('basketball')
 const ctx = canvasBasketball.getContext('2d')
 
-const canvasTyping = document.getElementById('typing')
+const startButton = document.getElementById('start-button')
+const instructionButton = document.getElementById('instruction-button')
+const instruction = document.getElementById('instruction')
+const startScreen = document.getElementById('start-menu')
 
 const inputField = document.getElementById('input-field')
 
-const textArray = ['bat','cat','dog','air','pink','tear','sock','chip','quit','ball','puck','cross','shoot']
+const basketMade = document.getElementById('score')
+let score = 0
+basketMade.innerHTML = `Score: 0`
+
+const updateScore = () => {
+    basketMade.innerHTML = `Score: ${score}`
+}
+
+const textArray = ['kale','dunk','dog','air','pink','tear','sock','chip','quit','ball','puck','cross','shoot']
+
+instruction.addEventListener ('click',()=>{
+    instruction.style.display = 'none'
+})
+
+instructionButton.addEventListener ('click',()=>{
+    instruction.style.display = 'flex'
+})
+
+startButton.addEventListener ('click',()=>{
+    startScreen.style.zIndex = '0'
+})
 
 const getRandomIndex = () => {
     let random = Math.floor(Math.random() * textArray.length)
     return random
 }
 
-// console.log(getRandomIndex())
 let randomText = textArray[getRandomIndex()]
-
 const displayWord = document.getElementById('prompt')
 displayWord.innerHTML = randomText
 
 let value = ''
-let correct = true
+let correct = 0
 const getValue = () => {
     value = document.getElementById('input-text').value
-    //console.log(value)
 }
 
 const compareValue = () => {
     if(value === randomText){
         //canvasBasketball.style.zIndex = '10'
         inputField.reset()  
-        value = '' 
-        ballMake.resetAnimation()
-        //ctx.reset()
-        return correct
-      
+        score++
+        return correct = .43
     } else {
         inputField.reset()
-        ballMiss.resetAnimation()
-        //ctx.reset()
-        return correct = false
-        
+        return correct = .53
     }
 }
 
@@ -50,10 +64,10 @@ const replaceText = () => {
 }
 
 const animating = (val) => {
-    if (val === true) {
-        shootBallMake = setInterval(ballMake.animation, 30)
+    if (val === .43) {
+        generateBall(correct).animation()
     } else {
-        shootBallMiss = setInterval(ballMiss.animation, 30)
+        generateBall(correct).animation()
     }
 }
 
@@ -62,22 +76,21 @@ document.addEventListener('submit',()=>{
     compareValue()
     replaceText()
     animating(correct)
-
+    updateScore()
 })
 
-let keyPressCounter = 0
-document.addEventListener('keydown', (e)=>{
-    if(e.key === 'j'){
-        keyPressCounter++
-        console.log(keyPressCounter)
-    }
+// let keyPressCounter = 0
+// document.addEventListener('keydown', (e)=>{
+//     if(e.key === 'j'){
+//         keyPressCounter++
+//         console.log(keyPressCounter)
+//     }
     
-})
+// })
 
 // $$$$$$$$$$$$$$$$$$$$$$$$$$$$ BASKETBALL $$$$$$$$$$$$$$$$$$$$$$$$$$$$
 const basketballImage = new Image(100, 100)
 basketballImage.src = 'ball.png'
-
 
 class Basketball {  
     constructor (speed){
@@ -101,13 +114,16 @@ class Basketball {
     secondPassed = 0
     animationSpeed = 1200
     timeStamp = 100
+    req = null
     
     render () {
-        //ctx.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh)
+        //ctx.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh) 
         ctx.drawImage(basketballImage, this.frame * this.sw, 0, this.sw, this.sh, this.dx, this.dy, 30, 30)
     }
 
     trajectory = (speed) => {
+        this.secondPassed = (this.timeStamp - this.oldTimeStamp)/1000
+        this.oldTimeStamp = this.timeStamp
         this.timeStamp+= 10
         this.T += this.animationSpeed * this.secondPassed
         this.dx = speed * Math.cos(-this.angle * Math.PI/180) * this.T + this.X0
@@ -125,48 +141,23 @@ class Basketball {
         } else {
             this.frame = 0
         }
-        this.secondPassed = (this.timeStamp - this.oldTimeStamp)/1000
-        this.oldTimeStamp = this.timeStamp
         //change the speed variable on either miss or make
         this.trajectory(this.speed)
-        
-        console.log('dx',this.dx)
-        console.log('dy',this.dy)
-        if (this.dx > 310) {
-            clearInterval(shootBallMake) 
-            clearInterval(shootBallMiss) 
-            
+
+        this.req = requestAnimationFrame(this.animation.bind(this))
+        if(this.dx > 310) {
+            this.stopAnimation()
         }
-        
-    }
-    resetAnimation () {
-        this.X0 = 0
-        this.Y0 = canvasBasketball.height 
-        this.X = this.X0
-        this.Y = this.Y0
-        this.sw = 100
-        this.sh = 100
-        this.dx = this.X
-        this.dy = this.Y
-    } 
-}
-
-const ballMake = new Basketball(.43)
-const ballMiss = new Basketball(.53)
-
-
-let shootBallMake = null
-let shootBallMiss = null
-
-
-document.addEventListener('keyup', (e)=>{
-    if (e.key === 'z') {
-        clearInterval(shootBallMake) 
-        clearInterval(shootBallMiss) 
     }
     
-})
+    stopAnimation () {
+        cancelAnimationFrame(this.req)
+    }
+}
 
+const generateBall = (speed) => {
+    return new Basketball(speed)
+}
 
 document.addEventListener('DOMcontentloaded',()=>{
 
