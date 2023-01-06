@@ -5,8 +5,10 @@ const startButton = document.getElementById('start-button')
 const instructionButton = document.getElementById('instruction-button')
 const instruction = document.getElementById('instruction')
 const startScreen = document.getElementById('start-menu')
-
+const endScreen = document.getElementById('end-screen')
+const endScore = document.getElementById('end-score')
 const inputField = document.getElementById('input-field')
+const playAgainButton = document.getElementById('play-again')
 
 const basketMade = document.getElementById('score')
 let score = 0
@@ -16,7 +18,36 @@ const updateScore = () => {
     basketMade.innerHTML = `Score: ${score}`
 }
 
-const textArray = ['kale','dunk','dog','air','pink','tear','sock','chip','quit','ball','puck','cross','shoot']
+const timerText = document.getElementById('timer')
+let timerNum = 30
+let gameActive = true
+
+const countdown = () => {
+    timerNum -= 1
+    timerText.innerHTML = timerNum
+    if (timerNum === 0) { 
+        clearInterval(activeTimer)
+        showScore()
+        endScreen.style.zIndex = '5'
+        return gameActive = false
+    }
+}
+
+let activeTimer = null
+const timer =() => {
+   activeTimer = setInterval(countdown, 1000)
+}
+
+const showScore = () => {
+    endScore.innerHTML = `Your score: ${score}`
+}
+
+playAgainButton.addEventListener('click', () => {
+    location.reload()
+})
+
+
+const textArray = ['kale','dunk','dog','air','pink','tear','sock','chip','quit','ball','puck','cross','shoot','shoe','score','poster','team','fake']
 
 instruction.addEventListener ('click',()=>{
     instruction.style.display = 'none'
@@ -28,6 +59,7 @@ instructionButton.addEventListener ('click',()=>{
 
 startButton.addEventListener ('click',()=>{
     startScreen.style.zIndex = '0'
+    timer()
 })
 
 const getRandomIndex = () => {
@@ -79,15 +111,6 @@ document.addEventListener('submit',()=>{
     updateScore()
 })
 
-// let keyPressCounter = 0
-// document.addEventListener('keydown', (e)=>{
-//     if(e.key === 'j'){
-//         keyPressCounter++
-//         console.log(keyPressCounter)
-//     }
-    
-// })
-
 // $$$$$$$$$$$$$$$$$$$$$$$$$$$$ BASKETBALL $$$$$$$$$$$$$$$$$$$$$$$$$$$$
 const basketballImage = new Image(100, 100)
 basketballImage.src = 'ball.png'
@@ -109,7 +132,7 @@ class Basketball {
     //set speed to .43 for make basket
     //speed = .43
     angle = 50
-    g = .0005
+    g = .0006
     oldTimeStamp = 0
     secondPassed = 0
     animationSpeed = 1200
@@ -145,8 +168,12 @@ class Basketball {
         this.trajectory(this.speed)
 
         this.req = requestAnimationFrame(this.animation.bind(this))
-        if(this.dx > 310) {
+        if(this.speed > .44 && this.dx > 300) {
             this.stopAnimation()
+            ctx.clearRect(0, 0, canvasBasketball.width, canvasBasketball.height)
+        } else if (this.speed < .44 && this.dx > 250) {
+            this.stopAnimation()
+            ctx.clearRect(0, 0, canvasBasketball.width, canvasBasketball.height)
         }
     }
     
@@ -159,7 +186,17 @@ const generateBall = (speed) => {
     return new Basketball(speed)
 }
 
-document.addEventListener('DOMcontentloaded',()=>{
+// const hoopImage = new Image()
+// hoopImage.src = 'basketball-hoop.png'
+// const renderHoop = () => {
+//     ctx.drawImage(hoopImage, 250, 50, 80, 132) 
+// }
+// const drawHoop = () => {
+//     requestAnimationFrame(renderHoop)
+// }
 
+
+document.addEventListener('DOMcontentloaded',()=>{
+    
 })
 

@@ -31,6 +31,21 @@ h2#score {
     align-items: flex-start;
 }
 
+h2#timer {
+    font-family: 'Gaegu', cursive;
+    color:  rgb(29, 21, 41);
+    font-size: 50px;
+    display: flex;
+    align-items: flex-start;
+}
+
+h2#end-score {
+    font-family: 'Gaegu', cursive;
+    color:  rgb(29, 21, 41);
+    font-size: 50px;
+    display: flex;
+}
+
 div#game-container {
     display: flex;
     justify-content: center;
@@ -58,7 +73,7 @@ canvas#basketball {
     display: flex;
     height: 600px;
     width: 1000px;
-    background-image: url(clouds.png);
+    background-image: url(background-w-hoop.png);
     /*background-color: rgb(102, 169, 233);*/
     position: absolute;
 }
@@ -105,4 +120,13 @@ div#instruction {
 
 div#text-container {
     display: block;
+}
+
+div#end-screen {
+    border: 1px solid black;
+    display: flex;
+    height: 600px;
+    width: 1000px;
+    background-color: rgb(78, 67, 49);
+    position: absolute;
 }
