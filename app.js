@@ -47,7 +47,7 @@ playAgainButton.addEventListener('click', () => {
 })
 
 
-const textArray = ['kale','dunk','dog','air','pink','tear','sock','chip','quit','ball','puck','cross','shoot','shoe','score','poster','team','fake']
+const textArray = ['kale','dunk','dog','air','pink','tear','sock','chip','quit','ball','puck','cross','shoot','shoe','tall','poster','team','fake','jong','chan','biscuit','william','ambiscuit','zoom','dribble','fire','odeng','tomo', 'garden','view','lane']
 
 instruction.addEventListener ('click',()=>{
     instruction.style.display = 'none'
