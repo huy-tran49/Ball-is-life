@@ -9,6 +9,7 @@ const endScreen = document.getElementById('end-screen')
 const endScore = document.getElementById('end-score')
 const inputField = document.getElementById('input-field')
 const playAgainButton = document.getElementById('play-again')
+const input = document.querySelector('input')
 
 const basketMade = document.getElementById('score')
 let score = 0
@@ -46,7 +47,6 @@ playAgainButton.addEventListener('click', () => {
     location.reload()
 })
 
-
 const textArray = ['kale','dunk','dog','air','pink','tear','sock','chip','quit','ball','puck','cross','shoot','shoe','tall','poster','team','fake','biscuit','zoom','dribble','fire','garden','view','lane','scale']
 
 instruction.addEventListener ('click',()=>{
@@ -60,7 +60,12 @@ instructionButton.addEventListener ('click',()=>{
 startButton.addEventListener ('click',()=>{
     startScreen.style.zIndex = '0'
     timer()
+    focusTextArea()
 })
+
+const focusTextArea = () => {
+    input.focus()
+}
 
 const getRandomIndex = () => {
     let random = Math.floor(Math.random() * textArray.length)
@@ -79,7 +84,6 @@ const getValue = () => {
 
 const compareValue = () => {
     if(value === randomText){
-        //canvasBasketball.style.zIndex = '10'
         inputField.reset()  
         score++
         return correct = .43
@@ -196,7 +200,7 @@ const generateBall = (speed) => {
 // }
 
 
-document.addEventListener('DOMcontentloaded',()=>{
+// document.addEventListener('DOMcontentloaded',()=>{
     
-})
+// })
 
