@@ -65,6 +65,7 @@ startButton.addEventListener ('click',()=>{
 
 const focusTextArea = () => {
     input.focus()
+    input.select()
 }
 
 const getRandomIndex = () => {
