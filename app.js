@@ -24,7 +24,7 @@ let gameActive = true
 
 const countdown = () => {
     timerNum -= 1
-    timerText.innerHTML = timerNum
+    timerText.innerHTML = `Timer: ${timerNum}`
     if (timerNum === 0) { 
         clearInterval(activeTimer)
         showScore()
@@ -47,7 +47,7 @@ playAgainButton.addEventListener('click', () => {
 })
 
 
-const textArray = ['kale','dunk','dog','air','pink','tear','sock','chip','quit','ball','puck','cross','shoot','shoe','tall','poster','team','fake','jong','chan','biscuit','william','ambiscuit','zoom','dribble','fire','odeng','tomo', 'garden','view','lane']
+const textArray = ['kale','dunk','dog','air','pink','tear','sock','chip','quit','ball','puck','cross','shoot','shoe','tall','poster','team','fake','biscuit','zoom','dribble','fire','garden','view','lane','scale']
 
 instruction.addEventListener ('click',()=>{
     instruction.style.display = 'none'
